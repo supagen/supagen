@@ -1,7 +1,7 @@
 name: supagen
 description: A CLI tool to automate manual effort/repetitive things when using Supabase.
 version: 1.0.0
-repository: https://github.com/andikadeveloper/supagen
+repository: https://github.com/supagen/supagen
 
 environment:
   sdk: ^3.5.2
