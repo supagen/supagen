@@ -9,8 +9,10 @@ environment:
 dependencies:
   args: ^2.4.2
   cli_completion: ^0.5.1
+  get_it: ^7.7.0
   io: ^1.0.4
   mason: ^0.1.0-dev.60
+  scope: ^5.1.0
 
 dev_dependencies:
   lints: ^4.0.0
