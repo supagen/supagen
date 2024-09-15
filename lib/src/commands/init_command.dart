@@ -35,7 +35,7 @@ class InitCommand extends BaseCommand {
     logger.info('Initializing Supabase project using template: $template');
 
     if (template == kFlutter) {
-      _initFlutterProject();
+      await _initFlutterProject();
     }
 
     logger.info('Project generated successfully!');
@@ -44,7 +44,7 @@ class InitCommand extends BaseCommand {
   }
 
   // Just an example, it will be replaced with the actual implementation
-  void _initFlutterProject() async {
+  Future<void> _initFlutterProject() async {
     final brick = Brick.git(
       const GitPath(
         'https://github.com/felangel/mason.git',
