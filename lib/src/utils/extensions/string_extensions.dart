@@ -53,7 +53,9 @@ extension StringExtensions on String {
     ];
 
     if (dateTimeDataTypes.contains(this)) {
-      return 'DateTime';
+      // TODO: Implement DateTime converter
+      // return 'DateTime';
+      return 'String';
     }
 
     return 'dynamic';

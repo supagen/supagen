@@ -108,5 +108,11 @@ class InitCommand extends BaseCommand {
       projectName: projectName,
       tableDefinitions: tableDefinitions,
     );
+
+    final repositoryGenerator = DartRepositoryGenerator(logger: logger);
+    await repositoryGenerator.generate(
+      projectName: projectName,
+      tableDefinitions: tableDefinitions,
+    );
   }
 }
