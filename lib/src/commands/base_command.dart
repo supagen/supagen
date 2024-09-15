@@ -31,7 +31,7 @@ abstract class BaseCommand extends Command<int> {
     // Before running the command
     beforeCommand();
 
-    final runCommandResult = runCommand();
+    final runCommandResult = await runCommand();
 
     // After running the command
     afterCommand();
