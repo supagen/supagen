@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:mason/mason.dart';
 import 'package:supagen/src/commands/base_command.dart';
-import 'package:supagen/src/generators/dart/dart_model_generator.dart';
+import 'package:supagen/src/generators/dart/dart_generator.dart';
 import 'package:supagen/src/services/supabase_service.dart';
 import 'package:supagen/src/utils/constants.dart';
 import 'package:supagen/src/utils/extensions/extensions.dart';
@@ -23,10 +23,16 @@ class InitCommand extends BaseCommand {
       valueHelp: 'template',
     );
     argParser.addOption(
-      'project_url',
+      'project',
+      abbr: 'n',
+      help: 'The name of the project',
+      valueHelp: 'project',
+    );
+    argParser.addOption(
+      'supabase_url',
       abbr: 'p',
       help: 'The Supabase project URL',
-      valueHelp: 'project_url',
+      valueHelp: 'supabase_url',
     );
     argParser.addOption(
       'anon_key',
@@ -39,14 +45,19 @@ class InitCommand extends BaseCommand {
   @override
   Future<int> runCommand() async {
     final template = argResults!['template'] as String?;
-    final projectUrl = argResults!['project_url'] as String?;
+    final project = argResults!['project'] as String?;
+    final supabaseUrl = argResults!['supabase_url'] as String?;
     final anonKey = argResults!['anon_key'] as String?;
 
     if (template.isNullOrEmpty) {
       logger.err('Please provide a template');
       return ExitCode.usage.code;
     }
-    if (projectUrl.isNullOrEmpty) {
+    if (project.isNullOrEmpty) {
+      logger.err('Please provide a project name');
+      return ExitCode.usage.code;
+    }
+    if (supabaseUrl.isNullOrEmpty) {
       logger.err('Please provide a Supabase project URL');
       return ExitCode.usage.code;
     }
@@ -59,14 +70,19 @@ class InitCommand extends BaseCommand {
 
     logger.info('Fetching table definitions from Supabase project...');
     final supabaseService = SupabaseService(
-      projectUrl: projectUrl!,
+      supabaseUrl: supabaseUrl!,
       anonKey: anonKey!,
     );
     final tableDefinitions = await supabaseService.getTableDefinitions();
     logger.info('Table definitions fetched successfully!');
 
     if (template == kFlutter) {
-      await _initFlutterProject(tableDefinitions);
+      await _initFlutterProject(
+        project!,
+        supabaseUrl,
+        anonKey,
+        tableDefinitions,
+      );
     }
 
     logger.info('Project generated successfully!');
@@ -75,9 +91,22 @@ class InitCommand extends BaseCommand {
   }
 
   Future<void> _initFlutterProject(
+    String projectName,
+    String supabaseUrl,
+    String anonKey,
     Map<String, dynamic> tableDefinitions,
   ) async {
+    final flutterProjectGenerator = FlutterProjectGenerator(logger: logger);
+    await flutterProjectGenerator.generate(
+      projectName: projectName,
+      supabaseUrl: supabaseUrl,
+      anonKey: anonKey,
+    );
+
     final modelGenerator = DartModelGenerator(logger: logger);
-    await modelGenerator.generate(tableDefinitions);
+    await modelGenerator.generate(
+      projectName: projectName,
+      tableDefinitions: tableDefinitions,
+    );
   }
 }
