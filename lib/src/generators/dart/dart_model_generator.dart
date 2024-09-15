@@ -10,8 +10,11 @@ class DartModelGenerator {
     required this.logger,
   });
 
-  Future<void> generate(Map<String, dynamic> tableDefinitions) async {
-    final path = 'lib/models';
+  Future<void> generate({
+    required String projectName,
+    required Map<String, dynamic> tableDefinitions,
+  }) async {
+    final path = './$projectName/lib/models';
     logger.info('Generating Dart models in: $path...');
 
     final target = DirectoryGeneratorTarget(
