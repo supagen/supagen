@@ -42,7 +42,7 @@ class DartModelGenerator {
       for (final property in definitionProperties.keys) {
         final type = definitionProperties[property]['format'] as String;
         final dartType = type.toDartDataType();
-        propertiesTypes.add('$dartType ${property.camelCase}');
+        propertiesTypes.add('$dartType? ${property.camelCase}');
         properties.add(property.camelCase);
       }
       await generator.generate(target, vars: <String, dynamic>{
