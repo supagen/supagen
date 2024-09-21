@@ -7,7 +7,20 @@ abstract class BaseCommand extends Command<int> {
 
   BaseCommand({
     required this.logger,
-  });
+  }) {
+    logger.level = Level.error;
+
+    argParser.addFlag(
+      'verbose',
+      abbr: 'v',
+      help: 'Enable verbose logging',
+      callback: (verbose) {
+        if (verbose) {
+          logger.level = Level.verbose;
+        }
+      },
+    );
+  }
 
   @override
   String get description => 'Command description';

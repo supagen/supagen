@@ -79,7 +79,7 @@ class InitCommand extends BaseCommand {
       }
     }
     if (anonKey.isNullOrEmpty) {
-      anonKey = logger.prompt('❓ Enter your Supabase anon key :');
+      anonKey = logger.prompt('❓ Enter your Supabase anon key :', hidden: true);
       if (anonKey.isNullOrEmpty) {
         logger.err('❌ Please provide a Supabase anon key');
         return ExitCode.usage.code;
