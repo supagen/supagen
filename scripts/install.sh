@@ -103,7 +103,7 @@ if ! mv "$SUPAGEN_DIR/supagen" "$SUPAGEN_DIR_BIN"; then
 fi
 
 # Create a symlink
-if ! ln -sf "$SUPAGEN_DIR_BIN/supagen" "$SYMLINK_TARGET"; then
+if ! sudo ln -sf "$SUPAGEN_DIR_BIN/supagen" "$SYMLINK_TARGET"; then
     error "Failed to create symlink."
 fi
 
