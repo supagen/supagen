@@ -19,4 +19,7 @@ void setup() {
   getIt.registerFactory<InitCommand>(() {
     return InitCommand();
   });
+  getIt.registerFactory<VersionCommand>(() {
+    return VersionCommand();
+  });
 }

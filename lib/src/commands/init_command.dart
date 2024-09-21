@@ -44,41 +44,61 @@ class InitCommand extends BaseCommand {
 
   @override
   Future<int> runCommand() async {
-    final template = argResults!['template'] as String?;
-    final project = argResults!['project'] as String?;
-    final supabaseUrl = argResults!['supabase_url'] as String?;
-    final anonKey = argResults!['anon_key'] as String?;
+    String template = argResults?['template'] ?? '';
+    String project = argResults?['project'] ?? '';
+    String supabaseUrl = argResults?['supabase_url'] ?? '';
+    String anonKey = argResults?['anon_key'] ?? '';
+
+    final supportedTemplates = [
+      kFlutter,
+    ];
+    if (!template.isNullOrEmpty && !supportedTemplates.contains(template)) {
+      logger.err('❌ Unsupported template: $template');
+      return ExitCode.usage.code;
+    }
 
     if (template.isNullOrEmpty) {
-      logger.err('Please provide a template');
-      return ExitCode.usage.code;
+      template = logger.chooseOne(
+        '❓ Select your project template :',
+        choices: supportedTemplates,
+        defaultValue: kFlutter,
+      );
     }
     if (project.isNullOrEmpty) {
-      logger.err('Please provide a project name');
-      return ExitCode.usage.code;
+      project = logger.prompt('❓ Enter your $template project name :');
+      if (project.isNullOrEmpty) {
+        logger.err('❌ Please provide a $template project name');
+        return ExitCode.usage.code;
+      }
     }
     if (supabaseUrl.isNullOrEmpty) {
-      logger.err('Please provide a Supabase project URL');
-      return ExitCode.usage.code;
+      supabaseUrl = logger.prompt('❓ Enter your Supabase project url :');
+      if (supabaseUrl.isNullOrEmpty) {
+        logger.err('❌ Please provide a Supabase project url');
+        return ExitCode.usage.code;
+      }
     }
     if (anonKey.isNullOrEmpty) {
-      logger.err('Please provide a Supabase anon key');
-      return ExitCode.usage.code;
+      anonKey = logger.prompt('❓ Enter your Supabase anon key :');
+      if (anonKey.isNullOrEmpty) {
+        logger.err('❌ Please provide a Supabase anon key');
+        return ExitCode.usage.code;
+      }
     }
 
     logger.info('Initializing Supabase project using template: $template');
 
     logger.info('Fetching table definitions from Supabase project...');
     final supabaseService = SupabaseService(
-      supabaseUrl: supabaseUrl!,
-      anonKey: anonKey!,
+      supabaseUrl: supabaseUrl,
+      anonKey: anonKey,
     );
     final tableDefinitions = await supabaseService.getTableDefinitions();
     logger.info('Table definitions fetched successfully!');
 
     if (template == kFlutter) {
       await _initFlutterProject(
-        project!,
+        project,
         supabaseUrl,
         anonKey,
         tableDefinitions,
