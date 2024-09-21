@@ -6,6 +6,9 @@ repository: https://github.com/supagen/supagen
 environment:
   sdk: ^3.5.2
 
+executables:
+  supagen: main
+
 dependencies:
   args: ^2.4.2
   cli_completion: ^0.5.1
