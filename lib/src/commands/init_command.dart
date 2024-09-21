@@ -59,27 +59,27 @@ class InitCommand extends BaseCommand {
 
     if (template.isNullOrEmpty) {
       template = logger.chooseOne(
-        'Select your project template',
+        '❓ Select your project template :',
         choices: supportedTemplates,
         defaultValue: kFlutter,
       );
     }
     if (project.isNullOrEmpty) {
-      project = logger.prompt('Enter your $template project name');
+      project = logger.prompt('❓ Enter your $template project name :');
       if (project.isNullOrEmpty) {
         logger.err('❌ Please provide a $template project name');
         return ExitCode.usage.code;
       }
     }
     if (supabaseUrl.isNullOrEmpty) {
-      supabaseUrl = logger.prompt('Enter your Supabase project url');
+      supabaseUrl = logger.prompt('❓ Enter your Supabase project url :');
       if (supabaseUrl.isNullOrEmpty) {
         logger.err('❌ Please provide a Supabase project url');
         return ExitCode.usage.code;
       }
     }
     if (anonKey.isNullOrEmpty) {
-      anonKey = logger.prompt('Enter your Supabase anon key');
+      anonKey = logger.prompt('❓ Enter your Supabase anon key :');
       if (anonKey.isNullOrEmpty) {
         logger.err('❌ Please provide a Supabase anon key');
         return ExitCode.usage.code;
