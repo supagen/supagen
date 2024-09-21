@@ -4,6 +4,7 @@ import 'package:mason/mason.dart';
 import 'package:supagen/src/commands/base_command.dart';
 import 'package:supagen/src/generators/dart/dart_generator.dart';
 import 'package:supagen/src/services/supabase_service.dart';
+import 'package:supagen/src/utils/constants.dart';
 import 'package:supagen/src/utils/extensions/extensions.dart';
 import 'package:supagen/supagen.dart';
 
@@ -71,16 +72,16 @@ class ImportCommand extends BaseCommand {
   ) async {
     final modelGenerator = DartModelGenerator(logger: logger);
     await modelGenerator.generate(
-      projectName: 'supagen',
+      projectName: kPackageName,
       tableDefinitions: tableDefinitions,
-      command: 'import',
+      command: name,
     );
 
     final repositoryGenerator = DartRepositoryGenerator(logger: logger);
     await repositoryGenerator.generate(
-      projectName: 'supagen',
+      projectName: kPackageName,
       tableDefinitions: tableDefinitions,
-      command: 'import',
+      command: name,
     );
   }
 }
