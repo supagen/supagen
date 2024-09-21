@@ -49,12 +49,18 @@ class InitCommand extends BaseCommand {
     String supabaseUrl = argResults?['supabase_url'] ?? '';
     String anonKey = argResults?['anon_key'] ?? '';
 
+    final supportedTemplates = [
+      kFlutter,
+    ];
+    if (!template.isNullOrEmpty && !supportedTemplates.contains(template)) {
+      logger.err('[ERR] Unsupported template: $template');
+      return ExitCode.usage.code;
+    }
+
     if (template.isNullOrEmpty) {
       template = logger.chooseOne(
         'Select your project template',
-        choices: [
-          kFlutter,
-        ],
+        choices: supportedTemplates,
         defaultValue: kFlutter,
       );
     }
