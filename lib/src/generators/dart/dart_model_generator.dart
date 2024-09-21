@@ -13,8 +13,16 @@ class DartModelGenerator {
   Future<void> generate({
     required String projectName,
     required Map<String, dynamic> tableDefinitions,
+    String command = 'init',
   }) async {
-    final path = './$projectName/lib/models';
+    String path = './$projectName/lib/models';
+    if (command == 'import') {
+      path = './lib/models';
+
+      if (!Directory(path).existsSync()) {
+        throw '❌ Unable to find Dart models in: $path';
+      }
+    }
     logger.info('Generating Dart models in: $path...');
 
     final target = DirectoryGeneratorTarget(

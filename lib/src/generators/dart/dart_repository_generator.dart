@@ -13,9 +13,18 @@ class DartRepositoryGenerator {
   Future<void> generate({
     required String projectName,
     required Map<String, dynamic> tableDefinitions,
+    String command = 'init',
   }) async {
-    final path = './$projectName/lib/repositories';
+    String path = './$projectName/lib/repositories';
+    if (command == 'import') {
+      path = './lib/repositories';
+
+      if (!Directory(path).existsSync()) {
+        throw '❌ Unable to find Dart repositories in: $path'; 
+      }
+    }
     logger.info('Generating Dart repositories in: $path...');
+
 
     final target = DirectoryGeneratorTarget(
       Directory.fromUri(Uri.parse(path)),
