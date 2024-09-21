@@ -15,7 +15,7 @@ void main(List<String> args) {
   pkg.githubRepo.value = '$owner/$repo';
   pkg.githubBearerToken.value = Platform.environment['GITHUB_TOKEN'];
 
-  pkg.addGithubTasks();
+  pkg.addAllTasks();
 
   grind(args);
 }
