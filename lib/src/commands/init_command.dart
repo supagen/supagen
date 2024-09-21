@@ -53,7 +53,7 @@ class InitCommand extends BaseCommand {
       kFlutter,
     ];
     if (!template.isNullOrEmpty && !supportedTemplates.contains(template)) {
-      logger.err('[ERR] Unsupported template: $template');
+      logger.err('❌ Unsupported template: $template');
       return ExitCode.usage.code;
     }
 
@@ -67,21 +67,21 @@ class InitCommand extends BaseCommand {
     if (project.isNullOrEmpty) {
       project = logger.prompt('Enter your $template project name');
       if (project.isNullOrEmpty) {
-        logger.err('[ERR] Please provide a $template project name');
+        logger.err('❌ Please provide a $template project name');
         return ExitCode.usage.code;
       }
     }
     if (supabaseUrl.isNullOrEmpty) {
       supabaseUrl = logger.prompt('Enter your Supabase project url');
       if (supabaseUrl.isNullOrEmpty) {
-        logger.err('[ERR] Please provide a Supabase project url');
+        logger.err('❌ Please provide a Supabase project url');
         return ExitCode.usage.code;
       }
     }
     if (anonKey.isNullOrEmpty) {
       anonKey = logger.prompt('Enter your Supabase anon key');
       if (anonKey.isNullOrEmpty) {
-        logger.err('[ERR] Please provide a Supabase anon key');
+        logger.err('❌ Please provide a Supabase anon key');
         return ExitCode.usage.code;
       }
     }
