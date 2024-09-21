@@ -1,31 +1,59 @@
 name: Deploy Release
 
 on:
-  release:
-    types:
-      - created
+  push:
+    tags:
+    - "v*"
+
 env:
-  PUB_CREDENTIALS: ${{ secrets.PUB_CREDENTIALS }}
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+    - name: Checkout
+      uses: actions/checkout@v4
 
-      - name: Prepare environment
-        uses: ./.github/actions/prepare
+    - name: Prepare environment
+      uses: ./.github/actions/prepare
 
-      - name: Deploy
-        run: dart compile exe bin/main.dart -o supagen
+    - name: Deploy Github
+      run: dart run grinder pkg-github-release
 
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./supagen
-          asset_name: supagen
-          asset_content_type: application/octet-stream
+    - name: Deploy Github Linux
+      run: dart run grinder pkg-github-linux
+
+  deploy-windows:
+    name: Deploy (Windows)
+    runs-on: windows-latest
+    needs: release
+    env:
+      GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Prepare environment
+      uses: ./.github/actions/prepare
+
+    - name: Deploy Github Windows
+      run: dart run grinder pkg-github-windows
+
+  deploy-macos:
+    name: Deploy (Macos)
+    runs-on: macos-latest
+    needs: release
+    env:
+      GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Prepare environment
+      uses: ./.github/actions/prepare
+
+    - name: Deploy Github Mac
+      run: dart run grinder pkg-github-macos

@@ -10,11 +10,15 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Setup Dart
-      uses: dart-lang/setup-dart@v1
-      with:
-        sdk: ${{ inputs.sdk-version }}
+  - name: Setup Dart
+    uses: dart-lang/setup-dart@v1
+    with:
+      sdk: ${{ inputs.sdk-version }}
 
-    - name: Get dependencies
-      run: dart pub get
-      shell: bash
+  - name: Get dependencies
+    run: dart pub get
+    shell: bash
+
+  - name: Build Version
+    run: dart run build_runner build --delete-conflicting-outputs
+    shell: bash
