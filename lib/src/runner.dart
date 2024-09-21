@@ -15,6 +15,7 @@ class SupagenCommandRunner extends CompletionCommandRunner<int> {
   }) : super(kPackageName, kPackageDescription) {
     // List supagen commands
     addCommand(getIt.get<InitCommand>());
+    addCommand(getIt.get<VersionCommand>());
   }
 
   @override
