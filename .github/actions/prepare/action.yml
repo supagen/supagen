@@ -1,0 +1,20 @@
+name: "Prepare"
+description: "Prepare the project"
+
+inputs:
+  sdk-version:
+    description: "Dart SDK version"
+    required: false
+    default: "3.5.2"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup Dart
+      uses: dart-lang/setup-dart@v1
+      with:
+        sdk: ${{ inputs.sdk-version }}
+
+    - name: Get dependencies
+      run: dart pub get
+      shell: bash
