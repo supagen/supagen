@@ -4,6 +4,7 @@ import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
 import 'package:cli_completion/cli_completion.dart';
 import 'package:mason/mason.dart';
+import 'package:supagen/src/commands/import_command.dart';
 import 'package:supagen/src/utils/constants.dart';
 import 'package:supagen/supagen.dart';
 
@@ -16,6 +17,7 @@ class SupagenCommandRunner extends CompletionCommandRunner<int> {
     // List supagen commands
     addCommand(getIt.get<InitCommand>());
     addCommand(getIt.get<VersionCommand>());
+    addCommand(getIt.get<ImportCommand>());
   }
 
   @override
