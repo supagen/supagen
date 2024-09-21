@@ -1,3 +1,22 @@
-## 1.0.0
+## 1.0.0-alpha.1
 
-- Initial version.
+- Initial commit
+- init dart cli project
+- chore(docs): update README
+- feat: init boilerplate project
+- chore: update docs
+- fix: call init flutter project
+- feat: add ability to convert supabase tables into dart codes
+- feat: call brick generate flutter project
+- feat: add ability to generate CRUD code
+- fix: datetime dart data type
+- chore: add nullable model
+- feat: add release workflow
+- refactor: implement user input for undeclare flag option
+- fix: check supported template
+- refactor: change ERR to ❌ on error logger
+- refactor: enhance wording and icon usage
+- feat: add version command
+- chore: bump version
+- ci: update github workflow to use grinder
+- chore: add script install.sh
