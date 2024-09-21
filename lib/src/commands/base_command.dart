@@ -18,6 +18,8 @@ abstract class BaseCommand extends Command<int> {
   @override
   String get invocation => '$kPackageName $name';
 
+  bool get hasLifecycle => true;
+
   void beforeCommand() {
     logger.info('Running $name command...');
   }
@@ -28,6 +30,11 @@ abstract class BaseCommand extends Command<int> {
 
   @override
   Future<int> run() async {
+    if (!hasLifecycle) {
+      final runCommandResult = await runCommand();
+      return runCommandResult;
+    }
+
     // Before running the command
     beforeCommand();
 
