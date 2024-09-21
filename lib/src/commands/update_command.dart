@@ -8,14 +8,14 @@ import 'package:supagen/src/utils/constants.dart';
 import 'package:supagen/src/utils/extensions/extensions.dart';
 import 'package:supagen/supagen.dart';
 
-class ImportCommand extends BaseCommand {
+class UpdateCommand extends BaseCommand {
   @override
-  final name = 'import';
+  final name = 'update';
 
   @override
-  String get description => 'Import Supabase table definitions';
+  String get description => 'Update Supabase table definitions';
 
-  ImportCommand() : super(logger: getIt.get(), progressLogger: getIt.get());
+  UpdateCommand() : super(logger: getIt.get(), progressLogger: getIt.get());
 
   @override
   Future<int> runCommand() async {

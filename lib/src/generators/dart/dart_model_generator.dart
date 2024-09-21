@@ -16,7 +16,7 @@ class DartModelGenerator {
     String command = 'init',
   }) async {
     String path = './$projectName/lib/models';
-    if (command == 'import') {
+    if (command == 'update') {
       path = './lib/models';
 
       if (!Directory(path).existsSync()) {

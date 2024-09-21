@@ -16,7 +16,7 @@ class DartRepositoryGenerator {
     String command = 'init',
   }) async {
     String path = './$projectName/lib/repositories';
-    if (command == 'import') {
+    if (command == 'update') {
       path = './lib/repositories';
 
       if (!Directory(path).existsSync()) {
