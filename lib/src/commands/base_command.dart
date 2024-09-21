@@ -4,11 +4,14 @@ import 'package:supagen/src/utils/constants.dart';
 
 abstract class BaseCommand extends Command<int> {
   final Logger logger;
+  final Logger progressLogger;
 
   BaseCommand({
     required this.logger,
+    required this.progressLogger,
   }) {
     logger.level = Level.error;
+    progressLogger.level = Level.verbose;
 
     argParser.addFlag(
       'verbose',

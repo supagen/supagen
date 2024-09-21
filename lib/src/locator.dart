@@ -7,7 +7,9 @@ final getIt = GetIt.instance;
 
 void setup() {
   // Logger
-  getIt.registerSingleton<Logger>(Logger());
+  getIt.registerFactory<Logger>(() {
+    return Logger();
+  });
 
   // Runner
   getIt.registerFactory<SupagenCommandRunner>(() {

@@ -15,7 +15,7 @@ class InitCommand extends BaseCommand {
   @override
   String get description => 'Initialize a new Supabase project';
 
-  InitCommand() : super(logger: getIt.get()) {
+  InitCommand() : super(logger: getIt.get(), progressLogger: getIt.get()) {
     argParser.addOption(
       'template',
       abbr: 't',
@@ -89,6 +89,9 @@ class InitCommand extends BaseCommand {
     logger.info('Initializing Supabase project using template: $template');
 
     logger.info('Fetching table definitions from Supabase project...');
+
+    progressLogger.progress('Generating');
+
     final supabaseService = SupabaseService(
       supabaseUrl: supabaseUrl,
       anonKey: anonKey,
@@ -105,7 +108,8 @@ class InitCommand extends BaseCommand {
       );
     }
 
-    logger.info('Project generated successfully!');
+    progressLogger.info('\n\n');
+    progressLogger.info('Project generated successfully! 🚀');
 
     return ExitCode.success.code;
   }

@@ -15,7 +15,7 @@ class ImportCommand extends BaseCommand {
   @override
   String get description => 'Import Supabase table definitions';
 
-  ImportCommand() : super(logger: getIt.get());
+  ImportCommand() : super(logger: getIt.get(), progressLogger: getIt.get());
 
   @override
   Future<int> runCommand() async {
@@ -49,6 +49,9 @@ class ImportCommand extends BaseCommand {
     anonKey = anonKey.replaceAll('SUPABASE_ANON_KEY=', '');
 
     logger.info('Fetching table definitions from Supabase project...');
+
+    progressLogger.progress('Generating');
+
     final supabaseService = SupabaseService(
       supabaseUrl: supabaseUrl,
       anonKey: anonKey,
@@ -61,6 +64,9 @@ class ImportCommand extends BaseCommand {
       anonKey,
       tableDefinitions,
     );
+
+    progressLogger.info('\n\n');
+    progressLogger.info('Project updated successfully! 🚀');
 
     return ExitCode.success.code;
   }
