@@ -15,13 +15,13 @@ class FlutterProjectGenerator {
     required anonKey,
   }) async {
     final path = './$projectName';
-    logger.info('Generating Flutter project in: $path...');
+    logger.detail('Generating Flutter project in: $path...');
 
     final target = DirectoryGeneratorTarget(
       Directory.fromUri(Uri.parse(path)),
     );
 
-    logger.info('Fetching Flutter project template...');
+    logger.detail('Fetching Flutter project template...');
     final brick = Brick.git(
       const GitPath(
         'https://github.com/supagen/supagen_bricks.git',
@@ -29,7 +29,7 @@ class FlutterProjectGenerator {
       ),
     );
     final generator = await MasonGenerator.fromBrick(brick);
-    logger.info('Flutter project template fetched successfully!');
+    logger.detail('Flutter project template fetched successfully!');
 
     await generator.generate(target, vars: <String, dynamic>{
       'project_name': projectName,
@@ -37,6 +37,6 @@ class FlutterProjectGenerator {
       'anon_key': anonKey,
     });
 
-    logger.info('Flutter project generated successfully!');
+    logger.detail('Flutter project generated successfully!');
   }
 }

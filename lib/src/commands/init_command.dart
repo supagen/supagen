@@ -15,7 +15,7 @@ class InitCommand extends BaseCommand {
   @override
   String get description => 'Initialize a new Supabase project';
 
-  InitCommand() : super(logger: getIt.get(), progressLogger: getIt.get()) {
+  InitCommand() : super(logger: getIt.get()) {
     argParser.addOption(
       'template',
       abbr: 't',
@@ -86,18 +86,15 @@ class InitCommand extends BaseCommand {
       }
     }
 
-    logger.info('Initializing Supabase project using template: $template');
+    Progress progress = logger.progress('Generating $template project...');
 
-    logger.info('Fetching table definitions from Supabase project...');
-
-    progressLogger.progress('Generating');
-
+    logger.detail('Fetching table definitions from Supabase project...');
     final supabaseService = SupabaseService(
       supabaseUrl: supabaseUrl,
       anonKey: anonKey,
     );
     final tableDefinitions = await supabaseService.getTableDefinitions();
-    logger.info('Table definitions fetched successfully!');
+    logger.detail('Table definitions fetched successfully!');
 
     if (template == kFlutter) {
       await _initFlutterProject(
@@ -108,8 +105,7 @@ class InitCommand extends BaseCommand {
       );
     }
 
-    progressLogger.info('\n\n');
-    progressLogger.info('Project generated successfully! 🚀');
+    progress.complete('Project generated successfully! 🚀');
 
     return ExitCode.success.code;
   }

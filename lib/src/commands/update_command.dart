@@ -15,7 +15,7 @@ class UpdateCommand extends BaseCommand {
   @override
   String get description => 'Update Supabase table definitions';
 
-  UpdateCommand() : super(logger: getIt.get(), progressLogger: getIt.get());
+  UpdateCommand() : super(logger: getIt.get());
 
   @override
   Future<int> runCommand() async {
@@ -48,16 +48,15 @@ class UpdateCommand extends BaseCommand {
 
     anonKey = anonKey.replaceAll('SUPABASE_ANON_KEY=', '');
 
-    logger.info('Fetching table definitions from Supabase project...');
-
-    progressLogger.progress('Generating');
+    logger.detail('Fetching table definitions from Supabase project...');
+    Progress progress = logger.progress('Updating project...');
 
     final supabaseService = SupabaseService(
       supabaseUrl: supabaseUrl,
       anonKey: anonKey,
     );
     final tableDefinitions = await supabaseService.getTableDefinitions();
-    logger.info('Table definitions fetched successfully!');
+    logger.detail('Table definitions fetched successfully!');
 
     await _importFlutterProject(
       supabaseUrl,
@@ -65,8 +64,7 @@ class UpdateCommand extends BaseCommand {
       tableDefinitions,
     );
 
-    progressLogger.info('\n\n');
-    progressLogger.info('Project updated successfully! 🚀');
+    progress.complete('Project updated successfully! 🚀');
 
     return ExitCode.success.code;
   }

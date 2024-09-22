@@ -4,14 +4,9 @@ import 'package:supagen/src/utils/constants.dart';
 
 abstract class BaseCommand extends Command<int> {
   final Logger logger;
-  final Logger progressLogger;
 
-  BaseCommand({
-    required this.logger,
-    required this.progressLogger,
-  }) {
-    logger.level = Level.error;
-    progressLogger.level = Level.verbose;
+  BaseCommand({required this.logger}) {
+    logger.level = Level.info;
 
     argParser.addFlag(
       'verbose',
@@ -37,11 +32,11 @@ abstract class BaseCommand extends Command<int> {
   bool get hasLifecycle => true;
 
   void beforeCommand() {
-    logger.info('Running $name command...');
+    logger.detail('Running $name command...');
   }
 
   void afterCommand() {
-    logger.info('Finished running $name command');
+    logger.detail('Finished running $name command');
   }
 
   @override

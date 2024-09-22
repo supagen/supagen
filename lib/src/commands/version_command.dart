@@ -16,7 +16,7 @@ class VersionCommand extends BaseCommand {
   @override
   bool get hasLifecycle => false;
 
-  VersionCommand() : super(logger: getIt.get(), progressLogger: getIt.get());
+  VersionCommand() : super(logger: getIt.get());
 
   @override
   Future<int> runCommand() async {

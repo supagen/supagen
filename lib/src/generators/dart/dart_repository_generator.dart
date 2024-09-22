@@ -20,17 +20,16 @@ class DartRepositoryGenerator {
       path = './lib/repositories';
 
       if (!Directory(path).existsSync()) {
-        throw '❌ Unable to find Dart repositories in: $path'; 
+        throw '❌ Unable to find Dart repositories in: $path';
       }
     }
-    logger.info('Generating Dart repositories in: $path...');
-
+    logger.detail('Generating Dart repositories in: $path...');
 
     final target = DirectoryGeneratorTarget(
       Directory.fromUri(Uri.parse(path)),
     );
 
-    logger.info('Fetching Dart repository template...');
+    logger.detail('Fetching Dart repository template...');
     final brick = Brick.git(
       const GitPath(
         'https://github.com/supagen/supagen_bricks.git',
@@ -38,17 +37,17 @@ class DartRepositoryGenerator {
       ),
     );
     final generator = await MasonGenerator.fromBrick(brick);
-    logger.info('Dart repository template fetched successfully!');
+    logger.detail('Dart repository template fetched successfully!');
 
     for (final table in tableDefinitions.keys) {
-      logger.info('Generating Dart repository for table: $table...');
+      logger.detail('Generating Dart repository for table: $table...');
       await generator.generate(target, vars: <String, dynamic>{
         'model_name': table.singularize,
         'table_name': table,
       });
-      logger.info('Dart repository generated successfully for table: $table');
+      logger.detail('Dart repository generated successfully for table: $table');
     }
 
-    logger.info('Dart repositories generated successfully in: $path');
+    logger.detail('Dart repositories generated successfully in: $path');
   }
 }
