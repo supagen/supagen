@@ -48,8 +48,13 @@ class DartModelGenerator {
       final propertiesTypes = [];
 
       for (final property in definitionProperties.keys) {
-        final type = definitionProperties[property]['format'] as String;
-        final dartType = type.toDartDataType();
+        final format = definitionProperties[property]['format'] as String;
+        String dartType = format.toDartDataType();
+        if (dartType == 'dynamic' &&
+            definitionProperties[property]['type'] != null) {
+          final type = definitionProperties[property]['type'] as String;
+          dartType = type.dynamicToDartDataType();
+        }
         propertiesTypes.add('$dartType? ${property.camelCase}');
         properties.add(property.camelCase);
       }

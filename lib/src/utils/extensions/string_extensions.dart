@@ -10,55 +10,49 @@ extension NullableStringExtensions on String? {
 
 extension StringExtensions on String {
   String toDartDataType() {
-    final stringDataTypes = [
-      'text',
-      'character varying',
-    ];
+    final dataTypes = <List<String>, String>{
+      [
+        // stirngs
+        'text',
+        'character varying',
+        'character',
+        'bytea',
+        'uuid',
+        'tsvector',
+        // date times
+        'timestamp',
+        'date',
+        'time',
+        'time with time zone',
+        'timestamp with time zone',
+        'timestamp without time zone'
+      ]: 'String',
+      ['bigint', 'integer', 'smallint']: 'int',
+      ['boolean']: 'bool',
+      ['real', 'numeric', 'double precision']: 'double',
+      ['jsonb', 'json']: 'Map<String, dynamic>',
+    };
 
-    if (stringDataTypes.contains(this)) {
-      return 'String';
+    if (contains('[]')) {
+      return 'List<${dataTypes.entries.firstWhere((element) => element.key.contains(replaceAll('[]', '')), orElse: () => MapEntry([], 'dynamic')).value}>';
     }
 
-    final intDataTypes = [
-      'bigint',
-      'integer',
-    ];
+    return dataTypes.entries
+        .firstWhere((element) => element.key.contains(this),
+            orElse: () => MapEntry([], 'dynamic'))
+        .value;
+  }
 
-    if (intDataTypes.contains(this)) {
-      return 'int';
-    }
+  String dynamicToDartDataType() {
+    final dataTypes = <String, String>{
+      'string': 'String',
+      'number': 'double',
+      'integer': 'int',
+      'boolean': 'bool',
+      'array': 'List<dynamic>',
+    };
 
-    final boolDataTypes = [
-      'boolean',
-    ];
-
-    if (boolDataTypes.contains(this)) {
-      return 'bool';
-    }
-
-    final decimalDataTypes = [
-      'real',
-    ];
-
-    if (decimalDataTypes.contains(this)) {
-      return 'double';
-    }
-
-    final dateTimeDataTypes = [
-      'timestamp',
-      'date',
-      'time',
-      'timestamp with time zone',
-      'timestamp without time zone',
-    ];
-
-    if (dateTimeDataTypes.contains(this)) {
-      // TODO: Implement DateTime converter
-      // return 'DateTime';
-      return 'String';
-    }
-
-    return 'dynamic';
+    return dataTypes[this] ?? 'dynamic';
   }
 
   // Make the string singular
