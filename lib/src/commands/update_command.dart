@@ -8,14 +8,14 @@ import 'package:supagen/src/utils/constants.dart';
 import 'package:supagen/src/utils/extensions/extensions.dart';
 import 'package:supagen/supagen.dart';
 
-class ImportCommand extends BaseCommand {
+class UpdateCommand extends BaseCommand {
   @override
-  final name = 'import';
+  final name = 'update';
 
   @override
-  String get description => 'Import Supabase table definitions';
+  String get description => 'Update Supabase table definitions';
 
-  ImportCommand() : super(logger: getIt.get());
+  UpdateCommand() : super(logger: getIt.get());
 
   @override
   Future<int> runCommand() async {
@@ -46,21 +46,32 @@ class ImportCommand extends BaseCommand {
       return ExitCode.usage.code;
     }
 
+    bool isConfirmed =
+        logger.confirm('Are you sure you want to update the project?');
+
+    if (!isConfirmed) {
+      return ExitCode.success.code;
+    }
+
     anonKey = anonKey.replaceAll('SUPABASE_ANON_KEY=', '');
 
-    logger.info('Fetching table definitions from Supabase project...');
+    logger.detail('Fetching table definitions from Supabase project...');
+    Progress progress = logger.progress('Updating project...');
+
     final supabaseService = SupabaseService(
       supabaseUrl: supabaseUrl,
       anonKey: anonKey,
     );
     final tableDefinitions = await supabaseService.getTableDefinitions();
-    logger.info('Table definitions fetched successfully!');
+    logger.detail('Table definitions fetched successfully!');
 
     await _importFlutterProject(
       supabaseUrl,
       anonKey,
       tableDefinitions,
     );
+
+    progress.complete('Project updated successfully! 🚀');
 
     return ExitCode.success.code;
   }
