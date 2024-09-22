@@ -12,7 +12,7 @@ extension StringExtensions on String {
   String toDartDataType() {
     final dataTypes = <List<String>, String>{
       [
-        // stirngs
+        // strings
         'text',
         'character varying',
         'character',
