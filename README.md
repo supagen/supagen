@@ -9,10 +9,10 @@ A CLI tool to automate manual effort/repetitive things when using Supabase.
 
 ## Features
 
-- Init supabase client project
-- Auto generate supabase table into client code
-- Auto generate CRUD functionality
-- Auto Integrate supabase auth
+- Init supabase client project using selected template
+- Generate and update models and CRUD functionality based on supabase tables
+- Ability to detect changes and print diff (Soon)
+- Ability to install module into existing project (ex: auth, realtime, etc) (Soon)
 
 ## Getting Started
 
