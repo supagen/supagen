@@ -36,10 +36,11 @@ Usage: supagen <command> [arguments]
 
 Global options:
 -h, --help    Print this usage information.
+--verbose     Print verbose output.
 
 Available commands:
-  import    Import Supabase table definitions
   init      Initialize a new Supabase project
+  update    Update Supabase table definitions
   version   Print the current version of supagen
 
 Run "supagen help <command>" for more information about a command.
