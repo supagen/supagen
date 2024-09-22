@@ -46,6 +46,13 @@ class UpdateCommand extends BaseCommand {
       return ExitCode.usage.code;
     }
 
+    bool isConfirmed =
+        logger.confirm('Are you sure you want to update the project?');
+
+    if (!isConfirmed) {
+      return ExitCode.success.code;
+    }
+
     anonKey = anonKey.replaceAll('SUPABASE_ANON_KEY=', '');
 
     logger.detail('Fetching table definitions from Supabase project...');
