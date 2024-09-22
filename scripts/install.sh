@@ -112,20 +112,11 @@ if ! command -v supagen &> /dev/null; then
     error "Installation verification failed. supagen may not be in PATH or failed to execute."
 fi
 
-INSTALLED_SUPAGEN_VERSION=$(supagen version 2>&1) || error "Failed to verify installed supagen version."
 
 supagen_version() {
     command clear
-    log_message "
- ▗▄▄▖▗▖ ▗▖▗▄▄▖  ▗▄▖  ▗▄▄▖▗▄▄▄▖▗▖  ▗▖
-▐▌   ▐▌ ▐▌▐▌ ▐▌▐▌ ▐▌▐▌   ▐▌   ▐▛▚▖▐▌
- ▝▀▚▖▐▌ ▐▌▐▛▀▘ ▐▛▀▜▌▐▌▝▜▌▐▛▀▀▘▐▌ ▝▜▌
-▗▄▄▞▘▝▚▄▞▘▐▌   ▐▌ ▐▌▝▚▄▞▘▐▙▄▄▖▐▌  ▐▌
-"
-    log_message "A CLI tool to automate manual effort/repetitive things when using Supabase."
-    log_message "Version: $INSTALLED_SUPAGEN_VERSION"
-    log_message "---------------------------------------------------------------------------"
-    command supagen
+    supagen version
+    supagen
 }
 
 supagen_version
