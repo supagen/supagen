@@ -1,6 +1,7 @@
 import 'package:args/command_runner.dart';
 import 'package:mason/mason.dart';
 import 'package:supagen/src/utils/constants.dart';
+import 'package:supagen/src/utils/extensions/logger_extension.dart';
 
 abstract class BaseCommand extends Command<int> {
   final Logger logger;
@@ -32,6 +33,7 @@ abstract class BaseCommand extends Command<int> {
   bool get hasLifecycle => true;
 
   void beforeCommand() {
+    logger.supagenVersion();
     logger.detail('Running $name command...');
   }
 

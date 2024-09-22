@@ -13,5 +13,7 @@ extension LoggerExtensions on Logger {
     """);
     info(kPackageDescription);
     info('Version: ${version.packageVersion}');
+    info(
+        '---------------------------------------------------------------------------');
   }
 }
