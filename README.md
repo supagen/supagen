@@ -1,9 +1,6 @@
 # Supagen (Supabase Generator)
 
-## C4 Model
-![Context Diagram](/assets/c4/context.png)
-![Container Diagram](/assets/c4/container.png)
-![Component Diagram](/assets/c4/component.png)
+[![Supagen Demo](/assets/supagen_demo.gif)](https://jam.dev/c/de952d15-8cf8-451c-96bc-0de2414e3853)
 
 ## Introduction
 A CLI tool to automate manual effort/repetitive things when using Supabase.
