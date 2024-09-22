@@ -1,13 +1,25 @@
 import 'package:args/command_runner.dart';
 import 'package:mason/mason.dart';
 import 'package:supagen/src/utils/constants.dart';
+import 'package:supagen/src/utils/extensions/logger_extension.dart';
 
 abstract class BaseCommand extends Command<int> {
   final Logger logger;
 
-  BaseCommand({
-    required this.logger,
-  });
+  BaseCommand({required this.logger}) {
+    logger.level = Level.info;
+
+    argParser.addFlag(
+      'verbose',
+      abbr: 'v',
+      help: 'Enable verbose logging',
+      callback: (verbose) {
+        if (verbose) {
+          logger.level = Level.verbose;
+        }
+      },
+    );
+  }
 
   @override
   String get description => 'Command description';
@@ -21,11 +33,12 @@ abstract class BaseCommand extends Command<int> {
   bool get hasLifecycle => true;
 
   void beforeCommand() {
-    logger.info('Running $name command...');
+    logger.supagenVersion();
+    logger.detail('Running $name command...');
   }
 
   void afterCommand() {
-    logger.info('Finished running $name command');
+    logger.detail('Finished running $name command');
   }
 
   @override

@@ -2,7 +2,7 @@
 
 # Function to log messages with date and time
 log_message() {
-    echo -e "$1"
+    echo "$1"
 }
 
 # Detect OS and architecture
@@ -103,7 +103,7 @@ if ! mv "$SUPAGEN_DIR/supagen" "$SUPAGEN_DIR_BIN"; then
 fi
 
 # Create a symlink
-if ! ln -sf "$SUPAGEN_DIR_BIN/supagen" "$SYMLINK_TARGET"; then
+if ! sudo ln -sf "$SUPAGEN_DIR_BIN/supagen" "$SYMLINK_TARGET"; then
     error "Failed to create symlink."
 fi
 
@@ -113,4 +113,19 @@ if ! command -v supagen &> /dev/null; then
 fi
 
 INSTALLED_SUPAGEN_VERSION=$(supagen version 2>&1) || error "Failed to verify installed supagen version."
-success "supagen $INSTALLED_SUPAGEN_VERSION installed successfully."
+
+supagen_version() {
+    command clear
+    log_message "
+ ▗▄▄▖▗▖ ▗▖▗▄▄▖  ▗▄▖  ▗▄▄▖▗▄▄▄▖▗▖  ▗▖
+▐▌   ▐▌ ▐▌▐▌ ▐▌▐▌ ▐▌▐▌   ▐▌   ▐▛▚▖▐▌
+ ▝▀▚▖▐▌ ▐▌▐▛▀▘ ▐▛▀▜▌▐▌▝▜▌▐▛▀▀▘▐▌ ▝▜▌
+▗▄▄▞▘▝▚▄▞▘▐▌   ▐▌ ▐▌▝▚▄▞▘▐▙▄▄▖▐▌  ▐▌
+"
+    log_message "A CLI tool to automate manual effort/repetitive things when using Supabase."
+    log_message "Version: $INSTALLED_SUPAGEN_VERSION"
+    log_message "---------------------------------------------------------------------------"
+    command supagen
+}
+
+supagen_version

@@ -16,20 +16,20 @@ class DartModelGenerator {
     String command = 'init',
   }) async {
     String path = './$projectName/lib/models';
-    if (command == 'import') {
+    if (command == 'update') {
       path = './lib/models';
 
       if (!Directory(path).existsSync()) {
         throw '❌ Unable to find Dart models in: $path';
       }
     }
-    logger.info('Generating Dart models in: $path...');
+    logger.detail('Generating Dart models in: $path...');
 
     final target = DirectoryGeneratorTarget(
       Directory.fromUri(Uri.parse(path)),
     );
 
-    logger.info('Fetching Dart model template...');
+    logger.detail('Fetching Dart model template...');
     final brick = Brick.git(
       const GitPath(
         'https://github.com/supagen/supagen_bricks.git',
@@ -37,10 +37,10 @@ class DartModelGenerator {
       ),
     );
     final generator = await MasonGenerator.fromBrick(brick);
-    logger.info('Dart model template fetched successfully!');
+    logger.detail('Dart model template fetched successfully!');
 
     for (final table in tableDefinitions.keys) {
-      logger.info('Generating Dart model for table: $table...');
+      logger.detail('Generating Dart model for table: $table...');
       final definitionProperties =
           tableDefinitions[table]['properties'] as Map<String, dynamic>;
 
@@ -58,9 +58,9 @@ class DartModelGenerator {
         'properties_types': propertiesTypes,
         'properties': properties,
       });
-      logger.info('Dart model generated successfully for table: $table');
+      logger.detail('Dart model generated successfully for table: $table');
     }
 
-    logger.info('Dart models generated successfully in: $path');
+    logger.detail('Dart models generated successfully in: $path');
   }
 }

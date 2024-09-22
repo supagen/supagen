@@ -79,22 +79,22 @@ class InitCommand extends BaseCommand {
       }
     }
     if (anonKey.isNullOrEmpty) {
-      anonKey = logger.prompt('❓ Enter your Supabase anon key :');
+      anonKey = logger.prompt('❓ Enter your Supabase anon key :', hidden: true);
       if (anonKey.isNullOrEmpty) {
         logger.err('❌ Please provide a Supabase anon key');
         return ExitCode.usage.code;
       }
     }
 
-    logger.info('Initializing Supabase project using template: $template');
+    Progress progress = logger.progress('Generating $template project...');
 
-    logger.info('Fetching table definitions from Supabase project...');
+    logger.detail('Fetching table definitions from Supabase project...');
     final supabaseService = SupabaseService(
       supabaseUrl: supabaseUrl,
       anonKey: anonKey,
     );
     final tableDefinitions = await supabaseService.getTableDefinitions();
-    logger.info('Table definitions fetched successfully!');
+    logger.detail('Table definitions fetched successfully!');
 
     if (template == kFlutter) {
       await _initFlutterProject(
@@ -105,7 +105,7 @@ class InitCommand extends BaseCommand {
       );
     }
 
-    logger.info('Project generated successfully!');
+    progress.complete('Project generated successfully! 🚀');
 
     return ExitCode.success.code;
   }
