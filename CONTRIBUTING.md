@@ -66,6 +66,14 @@ dart run bin/main.dart <supagen_command>
 - Use the present tense ("add feature" not "added feature").
 - Use the imperative mood ("move cursor to..." not "moves cursor to...").
 
+## Pull Requests
+
+- Use issue title for the PR title and add type prefix. Ex: `[DOCS] Prepare the repo for hacktoberfest`
+    - [FEAT] for new features
+    - [FIX] for bug fixes
+    - [DOCS] for documentation changes
+- Using the PR template is mandatory.
+
 ## Reporting Issues
 
 If you find a bug or have a feature request, please open an issue on GitHub.
