@@ -1,9 +1,3 @@
-## Description
-<!-- 
-Provide a brief description of the changes introduced in this pull request. 
-Explain why these changes are necessary and any context that might be helpful.
--->
-
 ## Related Issue
 <!-- 
 Link to the GitHub issue this pull request addresses (e.g., #123).
