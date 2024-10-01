@@ -1,6 +1,15 @@
-# Supagen (Supabase Generator)
+<!-- Award -->
+<div align="center">
+  <a href="https://supabase.com/blog/lw12-hackathon-winners#most-technically-impressive" target="_blank">
+    <img src='https://vdbs.vercel.app/medal.png' width="20%" alt="Medal image" />
+  </a>
+  <a href="https://supabase.com/blog/lw12-hackathon-winners#most-technically-impressive">
+    <p> Most technically impressive Supabase Hackathon 2024</p>
+  </a>
+</div>
 
-[![Supagen Demo](/assets/supagen_demo.gif)](https://jam.dev/c/de952d15-8cf8-451c-96bc-0de2414e3853)
+<!-- Supagen Demo -->
+![Supagen Demo](/assets/supagen_demo.gif)
 
 ## Introduction
 A CLI tool to automate manual effort/repetitive things when using Supabase.
