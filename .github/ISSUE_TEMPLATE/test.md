@@ -2,7 +2,7 @@
 name: Test
 about: Add unit tests
 title: "test: "
-labels: test
+labels: testing
 ---
 
 **Description**

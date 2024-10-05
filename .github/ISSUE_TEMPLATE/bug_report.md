@@ -1,6 +1,8 @@
 ---
 name: Bug report
 about: If something isn't working
+title: "bug: "
+labels: bug
 ---
 
 ## Description

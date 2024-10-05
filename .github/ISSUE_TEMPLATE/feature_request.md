@@ -1,6 +1,8 @@
 ---
 name: Feature request
 about: If you have a feature request
+title: "feat: "
+labels: feature
 ---
 
 ## Problem
@@ -15,7 +17,7 @@ about: If you have a feature request
 **If the feature request is approved, would you be willing to submit a PR?**
 
 - [ ] Yes
-- [ ] No
+- [ ] No (I want other contribute to this)
 
 ## Implementation Plan (If you want to get involved)
 <!-- A clear and concise description of how you would implement the feature. -->
