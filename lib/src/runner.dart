@@ -17,6 +17,7 @@ class SupagenCommandRunner extends CompletionCommandRunner<int> {
     addCommand(getIt.get<InitCommand>());
     addCommand(getIt.get<VersionCommand>());
     addCommand(getIt.get<UpdateCommand>());
+    addCommand(getIt.get<GenerateCommand>());
   }
 
   @override

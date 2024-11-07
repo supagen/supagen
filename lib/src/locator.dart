@@ -27,4 +27,7 @@ void setup() {
   getIt.registerFactory<UpdateCommand>(() {
     return UpdateCommand();
   });
+  getIt.registerFactory<GenerateCommand>(() {
+    return GenerateCommand();
+  });
 }
