@@ -46,7 +46,8 @@ class GenerateCommand extends BaseCommand {
           logger.err('❌ Please provide a $type project name');
           return ExitCode.usage.code;
         }
-        final projectDescription = logger.prompt('❓ Enter your project name:');
+        final projectDescription =
+            logger.prompt('❓ Enter your project description:');
         if (projectDescription.isNullOrEmpty) {
           logger.err('❌ Please provide a $type project description');
           return ExitCode.usage.code;
