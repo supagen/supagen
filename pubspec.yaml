@@ -1,6 +1,6 @@
 name: supagen
 description: A CLI tool to automate manual effort/repetitive things when using Supabase.
-version: 1.0.0-alpha.2
+version: 1.0.0-alpha.3
 repository: https://github.com/supagen/supagen
 
 environment:

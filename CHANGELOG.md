@@ -1,3 +1,8 @@
+## 1.0.0-alpha.3
+
+- Add script to automate installation of supagen CLI into Windows OS by [@Prakharpan-dey](https://github.com/Prakharpan-dey)
+- Add ability to generate C4 by [@andikadeveloper](https://github.com/andikadeveloper)
+
 ## 1.0.0-alpha.2
 
 - Implement flag verbose by [@davidsarono](https://github.com/davidsarono)
