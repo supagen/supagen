@@ -79,6 +79,7 @@ Global options:
 Available commands:
   init      Initialize a new Supabase project
   update    Update Supabase table definitions
+  generate  Generate code for your project
   version   Print the current version of supagen
 
 Run "supagen help <command>" for more information about a command.
