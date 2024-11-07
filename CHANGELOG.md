@@ -1,3 +1,7 @@
+## 1.0.0-alpha.4
+
+- Fix project description generate command by [@andikadeveloper](https://github.com/andikadeveloper)
+
 ## 1.0.0-alpha.3
 
 - Add script to automate installation of supagen CLI into Windows OS by [@Prakharpan-dey](https://github.com/Prakharpan-dey)
